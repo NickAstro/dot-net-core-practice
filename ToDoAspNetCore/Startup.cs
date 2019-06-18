@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using ToDoAspNetCore.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ToDoAspNetCore.Services;
 
 namespace ToDoAspNetCore
 {
@@ -33,6 +34,9 @@ namespace ToDoAspNetCore
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
