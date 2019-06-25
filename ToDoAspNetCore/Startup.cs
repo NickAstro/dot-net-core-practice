@@ -35,7 +35,8 @@ namespace ToDoAspNetCore
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+            //services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+            services.AddScoped<ITodoItemService, TodoItemService>();
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
