@@ -47,5 +47,22 @@ namespace ToDoAspNetCore.Controllers
             return RedirectToAction("Index");
         }
 
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MarkDone(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                RedirectToAction("Index");
+            }
+
+            var success = await _todoItemService.MarkDoneAsync(id);
+            if (!success)
+            {
+                return BadRequest("Could not mark item as complete");
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
